@@ -1,0 +1,21 @@
+// {}
+
+//[] - tablica lub kolekcja
+// Java Script Object Notation
+// w pliku json nie może być komentarzy :)
+
+{
+  "imie" : "Wojciech",
+  "nazwisko" : "Kowalski",
+  "wiek" : 13,
+  "adres" : {
+    "ulica" : "Sezamkowa",
+    "miasto" : "Warszawa"
+  },
+  "zainteresowania" : [
+    "sport",
+    "programowanie",
+    "java"
+  ]
+
+}

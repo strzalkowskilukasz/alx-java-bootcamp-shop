@@ -1,0 +1,55 @@
+{
+  "produkty" : [ {
+    "typ" : "komputer",
+    "nazwa" : "a",
+    "cena" : 2,
+    "id" : 1,
+    "marka" : "a",
+    "ram" : 1
+  }, {
+    "typ" : "komputer",
+    "nazwa" : "a",
+    "cena" : 3,
+    "id" : 3,
+    "marka" : "d",
+    "ram" : 2
+  }, {
+    "typ" : "komputer",
+    "nazwa" : "a",
+    "cena" : 2,
+    "id" : 4,
+    "marka" : "a",
+    "ram" : 2
+  }, {
+    "typ" : "dron",
+    "nazwa" : "w",
+    "cena" : 2,
+    "id" : 5,
+    "zasieg" : 2.0,
+    "czyMaKamere" : false
+  }, {
+    "typ" : "komputer",
+    "nazwa" : "a",
+    "cena" : 2,
+    "id" : 6,
+    "marka" : "s",
+    "ram" : 2
+  }, {
+    "typ" : "komputer",
+    "nazwa" : "a",
+    "cena" : 2,
+    "id" : 7,
+    "marka" : "a",
+    "ram" : 1
+  } ],
+  "nazwa" : "amazon.com",
+  "magazyn" : {
+    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":2,\"id\":1,\"marka\":\"a\",\"ram\":1}" : 332,
+    "{\"typ\":\"dron\",\"nazwa\":\"a\",\"cena\":3,\"id\":2,\"zasieg\":2.0,\"czyMaKamere\":true}" : 33,
+    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":3,\"id\":3,\"marka\":\"d\",\"ram\":2}" : 2,
+    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":2,\"id\":4,\"marka\":\"a\",\"ram\":2}" : 0,
+    "{\"typ\":\"dron\",\"nazwa\":\"w\",\"cena\":2,\"id\":5,\"zasieg\":2.0,\"czyMaKamere\":false}" : 66,
+    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":2,\"id\":6,\"marka\":\"s\",\"ram\":2}" : 0,
+    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":2,\"id\":7,\"marka\":\"a\",\"ram\":1}" : 0
+  }
+}
