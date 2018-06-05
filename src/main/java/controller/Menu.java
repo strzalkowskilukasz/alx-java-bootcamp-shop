@@ -6,6 +6,7 @@ import pliki.PlikiBinarne;
 import pliki.PlikiJson;
 
 import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Menu {
@@ -40,7 +41,7 @@ public class Menu {
         } catch (Exception e) {
             System.out.println("Blad odczytu, starujemy z pustym plikiem.");
             e.printStackTrace();
-            sklep = new Sklep("amazon.com");
+            sklep = new Sklep("komputeryidrony.com");
         }
 
         String wybor;
@@ -55,6 +56,8 @@ public class Menu {
         System.out.println("6- przyjmij na magazyn");
         System.out.println("7- wydaj z magazynu");
         System.out.println("8- pokaz stan magazynu");
+        System.out.println("9- przyjmij zamowienie");
+        System.out.println("10- usun zamowienie");
         System.out.println("q- wyjdz");
 
         do {
@@ -188,7 +191,7 @@ public class Menu {
                                     System.out.println("Wybierz jedną z opcji: ");
                                     System.out.println("1: Pobierz wszystko");
                                     System.out.println("2: Pobierz inną ilość");
-                                    System.out.println("3: Zamów towar");
+                                    System.out.println("3: Zamów towar"); // do napisania
                                     System.out.println("4: Dodaj do magazynu");
 
                                     wyborDodanie = scanner.next();
@@ -226,7 +229,35 @@ public class Menu {
                     sklep.wyswietlStanMagazynu();
 
                     break;
+                case "9":
+                    sklep.setGeneratorIdZamowienia(); // sprawdzam i ustawiam generator zamowienia po wczytaniu pliku
+                    sklep.getKoszyk().clear(); //czyszcze koszyk
+                    do {
+                        System.out.print("Podaj ID zakupionego produktu: ");
+                        id = scanner.nextLong();
+                        produkt = null;
+                        for (Produkt s : sklep.getProdukty()) {
+                            if (s.getId() == id) {
+                                produkt = s;
+                                break;
+                            }
+                        }
+                        if (produkt == null) {
+                            System.out.println("Nie ma takiego produktu w sklepie. Podaj poprawny numer ID produktu.");
+                        } else {
 
+                            System.out.print("Podaj iloś zamówionego produktu: ");
+                            int ilosc = scanner.nextInt();
+
+                            sklep.dodajdoKoszyka(produkt, ilosc);
+                        }
+                        System.out.println("Chcesz zatwierdzic kolejny produkt? T/N");
+                        wyborDodanie = scanner.next();
+                    } while (wyborDodanie.equalsIgnoreCase("T")) ;
+                        sklep.utworzZamowienie(sklep.getKoszyk());
+                        sklep.wydajZamowienieZMagazynu();
+
+                    break;
                 case "q":
                 case "Q":                           // Jeśli dwa case po soboie to albo albo
                     System.out.println("Koniec");
@@ -249,6 +280,8 @@ public class Menu {
                     System.out.println("6- przyjmij na magazyn");
                     System.out.println("7- wydaj z magazynu");
                     System.out.println("8- pokaz stan magazynu");
+                    System.out.println("9- przyjmij zamowienie");
+                    System.out.println("10- usun zamowienie");
                     System.out.println("q- wyjdz");
 
                     break;

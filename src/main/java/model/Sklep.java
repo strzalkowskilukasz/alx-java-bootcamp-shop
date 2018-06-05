@@ -1,6 +1,7 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -13,20 +14,35 @@ import java.util.*;
 
 public class Sklep implements Serializable {
     //    skladowe
+
+@JsonProperty("produkty")
     private Collection<Produkt> produkty;
 @JsonProperty("magazyn")
 @JsonSerialize( keyUsing =
         ProduktSerializer.class )
 @JsonDeserialize(keyUsing = ProduktDeserializer.class)
     private Map<Produkt, Integer> magazyn;
+    @JsonProperty("koszyk")
+    @JsonSerialize( keyUsing =
+            ProduktSerializer.class )
+    @JsonDeserialize(keyUsing = ProduktDeserializer.class)
+    private Map<Produkt, Integer> koszyk;
+    @JsonProperty("zamowienie")
+    private Map<Long, Object> zamowienie;
     private String nazwa;
+    public static long generatorIdZamowienia = 0L;
+    private long idZamowienia;
 
     public Sklep(){}
 @JsonCreator
     public Sklep(String nazwa) {
         this.produkty = new ArrayList<>();
-        this.magazyn = new HashMap<>();
+        this.magazyn = new LinkedHashMap<>();
+        this.koszyk = new LinkedHashMap<>();
+        this.zamowienie = new LinkedHashMap<>();
         this.nazwa = nazwa;
+        generatorIdZamowienia++;
+        this.idZamowienia = generatorIdZamowienia;
     }
 // gettery
 
@@ -38,23 +54,59 @@ public class Sklep implements Serializable {
         return magazyn;
     }
 
+    public Map<Produkt, Integer> getKoszyk() {
+        return koszyk;
+    }
+
+    public Map<Long, Object> getZamowienie() {
+        return zamowienie;
+    }
+@JsonIgnore
+    public long getIdZamowienia() {
+        generatorIdZamowienia++;
+       return generatorIdZamowienia;
+    }
+@JsonIgnore
     public String getNazwa() {
         return nazwa;
     }
 
     //    metody
 
+
     public void setGeneratorId() {
         long IdMax = 0L;
         for ( Produkt temp : produkty){
-             if (IdMax < temp.getId()){
-                 IdMax = temp.getId();
+            if (IdMax < temp.getId()){
+                IdMax = temp.getId();
             }
         }
-            Produkt.generatorId = IdMax;
+        Produkt.generatorId = IdMax;
+    }
+    public void setGeneratorIdZamowienia() {
+        long IdMax = 0L;
+        for ( Long temp : zamowienie.keySet()){
+             if (IdMax < temp){
+                 IdMax = temp;
+            }
+        }
+            generatorIdZamowienia= IdMax;
     }
     public void dodaj(Produkt produkt) {
         produkty.add(produkt);
+    }
+    public void dodajdoKoszyka(Produkt produkt, int ilosc) {
+        koszyk.put(produkt, ilosc);
+    }
+
+    public void utworzZamowienie(Object koszyk){
+        zamowienie.put(getIdZamowienia(), koszyk);
+    }
+
+    public void wydajZamowienieZMagazynu(){
+        for ( Produkt temp : getKoszyk().keySet()){
+            wydajZMagazynu(temp, getKoszyk().get(temp));
+        }
     }
 
     public void usun(long id) {

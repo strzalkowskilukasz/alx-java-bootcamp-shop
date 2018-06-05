@@ -30,10 +30,6 @@ public abstract class Produkt implements Comparable<Produkt>, Serializable {
         this.id = generatorId;
     }
 
-//    public void setId(long id) {
-//        this.id = id;
-//    }
-
     public String getNazwa() {
         return nazwa;
     }
