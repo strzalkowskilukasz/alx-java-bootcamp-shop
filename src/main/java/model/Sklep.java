@@ -9,40 +9,46 @@ import pliki.ProduktDeserializer;
 import pliki.ProduktSerializer;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.*;
 
 
 public class Sklep implements Serializable {
-    //    skladowe
 
-@JsonProperty("produkty")
+    @JsonProperty("produkty")
     private Collection<Produkt> produkty;
-@JsonProperty("magazyn")
-@JsonSerialize( keyUsing =
-        ProduktSerializer.class )
-@JsonDeserialize(keyUsing = ProduktDeserializer.class)
+    @JsonProperty("magazyn")
+    @JsonSerialize(keyUsing =
+            ProduktSerializer.class)
+    @JsonDeserialize(keyUsing = ProduktDeserializer.class)
     private Map<Produkt, Integer> magazyn;
     @JsonProperty("koszyk")
-    @JsonSerialize( keyUsing =
-            ProduktSerializer.class )
+    @JsonSerialize(keyUsing =
+            ProduktSerializer.class)
     @JsonDeserialize(keyUsing = ProduktDeserializer.class)
     private Map<Produkt, Integer> koszyk;
     @JsonProperty("zamowienie")
     private Map<Long, Object> zamowienie;
     private String nazwa;
-    public static long generatorIdZamowienia = 0L;
-    private long idZamowienia;
+    private long idZamowienia = 0L;
 
-    public Sklep(){}
-@JsonCreator
+    static BigDecimal kosztPrzesylkiDo5Kg = BigDecimal.valueOf(0);
+    static BigDecimal kosztPrzesylkiDo10Kg = BigDecimal.valueOf(30.0);
+    static BigDecimal kosztPrzesylkiPowyzej10Kg = BigDecimal.valueOf(50.0);
+    static BigDecimal vatKomputer = BigDecimal.valueOf(0.23);
+    static BigDecimal vatDron = BigDecimal.valueOf(0.18);
+
+    public Sklep() {
+    }
+
+    @JsonCreator
     public Sklep(String nazwa) {
         this.produkty = new ArrayList<>();
         this.magazyn = new LinkedHashMap<>();
         this.koszyk = new LinkedHashMap<>();
         this.zamowienie = new LinkedHashMap<>();
         this.nazwa = nazwa;
-        generatorIdZamowienia++;
-        this.idZamowienia = generatorIdZamowienia;
+        this.idZamowienia = 1L;
     }
 // gettery
 
@@ -61,52 +67,153 @@ public class Sklep implements Serializable {
     public Map<Long, Object> getZamowienie() {
         return zamowienie;
     }
-@JsonIgnore
+
     public long getIdZamowienia() {
-        generatorIdZamowienia++;
-       return generatorIdZamowienia;
+        return idZamowienia;
     }
-@JsonIgnore
+
+    //    @JsonIgnore
     public String getNazwa() {
         return nazwa;
     }
 
-    //    metody
+// metody
 
 
     public void setGeneratorId() {
         long IdMax = 0L;
-        for ( Produkt temp : produkty){
-            if (IdMax < temp.getId()){
+        for (Produkt temp : produkty) {
+            if (IdMax < temp.getId()) {
                 IdMax = temp.getId();
             }
         }
         Produkt.generatorId = IdMax;
     }
-    public void setGeneratorIdZamowienia() {
+
+    public void setIdZamowienia() {
         long IdMax = 0L;
-        for ( Long temp : zamowienie.keySet()){
-             if (IdMax < temp){
-                 IdMax = temp;
+        for (Long temp : zamowienie.keySet()) {
+            if (IdMax < temp) {
+                IdMax = temp;
             }
         }
-            generatorIdZamowienia= IdMax;
+        idZamowienia = IdMax;
     }
+
+    public long wygenerujIdZamowienia() {
+        idZamowienia++;
+        return idZamowienia;
+    }
+
     public void dodaj(Produkt produkt) {
         produkty.add(produkt);
+        System.out.println("Dodano do katalogu nowy produkt o numerze ID: " + produkt.getId());
     }
+
     public void dodajdoKoszyka(Produkt produkt, int ilosc) {
-        koszyk.put(produkt, ilosc);
+        if (koszyk.containsKey(produkt)) {
+            koszyk.replace(produkt, koszyk.get(produkt) + ilosc);
+        } else {
+            koszyk.put(produkt, ilosc);
+        }
+        System.out.println("Dodano pozycję do zamówienia.");
     }
 
-    public void utworzZamowienie(Object koszyk){
-        zamowienie.put(getIdZamowienia(), koszyk);
+    public void utworzZamowienie(Object koszyk) {
+        zamowienie.put(wygenerujIdZamowienia(), koszyk);
+
+        System.out.println("Przyjęto nowe zamówienie nr: " + idZamowienia);
     }
 
-    public void wydajZamowienieZMagazynu(){
-        for ( Produkt temp : getKoszyk().keySet()){
+    public void usunZamowienie(long id) {
+        boolean czyJest = false;
+        Iterator<Long> it = zamowienie.keySet().iterator();
+        while (it.hasNext()) {
+            Long temp = it.next();
+            if (temp == id) {
+                it.remove();
+                System.out.println("Usunięto zamówienie nr: " + id);
+                czyJest = true;
+            }
+        }
+                if (!czyJest){
+                System.out.println("Nie ma zamówienia o takim numerze. Sprawdź listę zamówień.");
+                }
+        }
+
+    public void wydajZamowienieZMagazynu() {
+        for (Produkt temp : getKoszyk().keySet()) {
             wydajZMagazynu(temp, getKoszyk().get(temp));
         }
+    }
+
+    public BigDecimal wartoscKoszyka() {
+        BigDecimal wartoscProduktu = BigDecimal.ZERO;
+        BigDecimal sumaWartosciProduktow = BigDecimal.ZERO;
+        for (Produkt temp : koszyk.keySet()) {
+            if (temp instanceof Komputer) {
+                wartoscProduktu = temp.getCena().multiply(vatKomputer).multiply(new BigDecimal(koszyk.get(temp)));
+            } else if (temp instanceof Dron) {
+                wartoscProduktu = temp.getCena().multiply(vatDron).multiply(new BigDecimal(koszyk.get(temp)));
+            }
+            sumaWartosciProduktow = sumaWartosciProduktow.add(wartoscProduktu);
+        }
+        return sumaWartosciProduktow;
+    }
+
+    public BigDecimal kosztPrzesylki() {
+        double lacznaWagaZamowienia = 0;
+        double wagaPojedynczejPozycji = 0;
+
+        for (Produkt temp : koszyk.keySet()) {
+            wagaPojedynczejPozycji = temp.getWaga() * koszyk.get(temp);
+            lacznaWagaZamowienia += wagaPojedynczejPozycji;
+        }
+
+        if (lacznaWagaZamowienia < 5) {
+            return kosztPrzesylkiDo5Kg;
+        } else if (lacznaWagaZamowienia < 10) {
+            return kosztPrzesylkiDo10Kg;
+        } else {
+            return kosztPrzesylkiPowyzej10Kg;
+        }
+    }
+
+    public BigDecimal wartoscZamowienia() {
+        return wartoscKoszyka().add(kosztPrzesylki());
+    }
+
+    public void pokazSzczegolyZamowienia() {
+        System.out.println("Zamówione produkty: ");
+        int liczbaPorzadkowa = 0;
+        for (Produkt temp : getKoszyk().keySet()) {
+            liczbaPorzadkowa++;
+            System.out.println(liczbaPorzadkowa + ":");
+            System.out.print("Rodzaj produktu: ");
+            if (temp instanceof Komputer) {
+                System.out.println("Komputer");
+            } else if (temp instanceof Dron){
+                System.out.println("Dron");
+            }
+            System.out.println("Nazwa produktu: " + temp.getNazwa());
+            if (temp instanceof Komputer) {
+                System.out.println("Marka: " + ((Komputer) temp).getMarka());
+                System.out.println("Ilość pamięci RAM: " + ((Komputer) temp).getRam() + " GB");
+            } else if (temp instanceof Dron) {
+                System.out.println("zasięg drona: " + ((Dron) temp).getZasieg() + " metrów");
+                if (((Dron) temp).isCzyMaKamere()) {
+                    System.out.println("Dron posiada kamerę.");
+                } else {
+                    System.out.println("Dron nie ma kamery na wyposażeniu.");
+                }
+            }
+            System.out.println("cena netto za sztukę: " + temp.getCena() + " PLN netto");
+            System.out.println("Ilość zamówionych sztuk: " + getKoszyk().get(temp));
+            System.out.println();
+        }
+        System.out.println("Wartość wszystkich produktów z podatkiem: " + wartoscKoszyka() + " PLN netto");
+        System.out.println("Koszt przesyłki: " + kosztPrzesylki() + " PLN netto");
+        System.out.println("Suma zamówienia wraz z przesyłką: " + wartoscZamowienia() + " PLN netto");
     }
 
     public void usun(long id) {
@@ -116,6 +223,7 @@ public class Sklep implements Serializable {
             Produkt produkt = iterator.next();
             if (produkt.getId() == id) {
                 iterator.remove();
+                System.out.println("Usunięto z katalogu produkt nr: " + id);
             }
         }
     }
@@ -127,14 +235,16 @@ public class Sklep implements Serializable {
         }
     }
 
-    public void przyjmijNaMagazyn(Produkt produkt, int ilosc){
+    public void przyjmijNaMagazyn(Produkt produkt, int ilosc) {
         if (!magazyn.containsKey(produkt)) {
             magazyn.put(produkt, ilosc);
         } else {
-           ilosc = magazyn.get(produkt) + ilosc;
-            magazyn.replace(produkt, ilosc);
+            int ilosc2 = magazyn.get(produkt) + ilosc;
+            magazyn.replace(produkt, ilosc2);
         }
+        System.out.println("Przyjęto na magazyn " + ilosc + " szt. produktu o numerze ID: " + produkt.getId());
     }
+
     public boolean wydajZMagazynu(Produkt produkt, int ilosc) {
         if (magazyn.get(produkt) < ilosc) {
             System.out.println("W magazynie nie ma wystarczającej ilości tego produktu. Obecny stan to: " + magazyn.get(produkt));
@@ -147,22 +257,28 @@ public class Sklep implements Serializable {
             return true;
         }
     }
+    public void usunZMagazynu(Produkt produkt) {
+        getMagazyn().remove(produkt);
+        System.out.println("Usunięto z magazynu produkt o numerze ID: " + produkt.getId());
+    }
 
     public void zmienStanMagazynowy(Produkt produkt) {
         magazyn.replace(produkt, 0);
+        System.out.println("Wydano wszystkie sztuki produktu o nazwie " + produkt.getNazwa());
     }
-    public void wyswietlStanMagazynu(){
+
+    public void wyswietlStanMagazynu() {
         System.out.println("Stan magazynu: ");
-        for (Produkt p : magazyn.keySet()){
+        for (Produkt p : magazyn.keySet()) {
             System.out.println("ID produktu: " + p.getId() + "\nNazwa produktu: " + p.getNazwa() + "\nLiczba sztuk na magazynie: " + magazyn.get(p));
         }
-        }
+    }
 
     public void wyswietlPosortowaneCenowo() {
         List<Produkt> kopiaProdukty = new ArrayList<>(produkty);
         Collections.sort(kopiaProdukty);
         Iterator<Produkt> it = kopiaProdukty.iterator();
-        while (it.hasNext()){
+        while (it.hasNext()) {
             Produkt temp = it.next();
             System.out.println(temp);
         }
@@ -173,9 +289,9 @@ public class Sklep implements Serializable {
             @Override
             public int compare(Produkt o1, Produkt o2) {
 //                return o1.nazwa.compareTo(o2.nazwa);
-                if(o1.nazwa.compareTo(o2.nazwa) > 0){
+                if (o1.nazwa.compareTo(o2.nazwa) > 0) {
                     return 1;
-                } else if(o1.nazwa.compareTo(o2.nazwa) < 0) {
+                } else if (o1.nazwa.compareTo(o2.nazwa) < 0) {
                     return -1;
                 } else
                     return 0;
@@ -187,32 +303,25 @@ public class Sklep implements Serializable {
             System.out.println(temp);
         }
     }
+    public void pokazListeZamowien() {
+
+        for (long temp : zamowienie.keySet()) {
+            System.out.println("Numer zamówienia: " + temp);
+                for (Map.Entry<Object, Integer> entry : ((Map<Object, Integer>) zamowienie.get(temp)).entrySet()) {
+                    System.out.println("Produkt: " + entry.getKey());
+                    System.out.println("Ilość: " + entry.getValue());
+                }
+            }
+        }
 
     @Override
     public String toString() {
-        return "Sklep{" +
-                "produkty=" + produkty +
-                ", magazyn=" + magazyn +
-                ", nazwa='" + nazwa + '\'' +
-                '}';
+        return "\nSKLEP " + getNazwa() +
+                "\nKATALOG PRODDUKTÓW: " + "\n" + produkty +
+                "\nMAGAZYN: " + "\n" + magazyn +
+                "\nOSTATNI KOSZYK: " + "\n" +  koszyk +
+                "\nZAMÓWIENIA: " + "\n" + zamowienie;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Sklep sklep = (Sklep) o;
-        return Objects.equals(produkty, sklep.produkty) &&
-                Objects.equals(magazyn, sklep.magazyn) &&
-                Objects.equals(nazwa, sklep.nazwa);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(produkty, magazyn, nazwa);
-    }
 
 }
-
-

@@ -6,7 +6,6 @@ import pliki.PlikiBinarne;
 import pliki.PlikiJson;
 
 import java.math.BigDecimal;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Menu {
@@ -46,6 +45,7 @@ public class Menu {
 
         String wybor;
         String wyborDodanie;
+        Produkt produkt;
 
         System.out.println("0- wydrukuj rejestr sklepu");
         System.out.println("1- dodaj produkt");
@@ -58,6 +58,7 @@ public class Menu {
         System.out.println("8- pokaz stan magazynu");
         System.out.println("9- przyjmij zamowienie");
         System.out.println("10- usun zamowienie");
+        System.out.println("11- pokaz liste zamowien");
         System.out.println("q- wyjdz");
 
         do {
@@ -71,7 +72,7 @@ public class Menu {
 
                     break;
                 case "1":
-                        sklep.setGeneratorId(); // sprawdzam i ustawiam generator po wczytaniu pliku
+                    sklep.setGeneratorId(); // sprawdzam i ustawiam generator po wczytaniu pliku
                     do {
                         System.out.println("Jaki produkt chcesz dodać? ");
                         System.out.println("1- Komputer ");
@@ -80,21 +81,23 @@ public class Menu {
 
                         switch (wyborDodanie) {
                             case "1":
-                            System.out.print("Podaj nazwe komputera: ");
-                            String nazwa = scanner.next();
-                            System.out.print("Podaj markę komputera: ");
-                            String marka = scanner.next();
-                            System.out.print("Podaj ilość ramu: ");
-                            int ram = scanner.nextInt();
-                            System.out.print("Podaj cenę komputera: ");
-                            BigDecimal cena = scanner.nextBigDecimal();
-                            scanner.nextLine();
+                                System.out.print("Podaj nazwe komputera: ");
+                                String nazwa = scanner.next();
+                                System.out.print("Podaj markę komputera: ");
+                                String marka = scanner.next();
+                                System.out.print("Podaj ilość ramu: ");
+                                int ram = scanner.nextInt();
+                                System.out.print("Podaj wagę komputera: ");
+                                double waga = scanner.nextDouble();
+                                System.out.print("Podaj cenę komputera: ");
+                                BigDecimal cena = scanner.nextBigDecimal();
+                                scanner.nextLine();
 
-                            Komputer komputer = new Komputer(nazwa, cena, marka, ram);
-                            sklep.dodaj(komputer);
-                            sklep.przyjmijNaMagazyn(komputer, 0);
+                                Komputer komputer = new Komputer(nazwa, cena, waga, marka, ram);
+                                sklep.dodaj(komputer);
+                                sklep.przyjmijNaMagazyn(komputer, 0);
 
-                            break;
+                                break;
                             case "2":
                                 System.out.print("Podaj nazwe drona: ");
                                 nazwa = scanner.next();
@@ -103,16 +106,18 @@ public class Menu {
                                 System.out.println("Czy dron ma kamerę? T/N");
                                 String czyMa = scanner.next();
                                 boolean czyMaKamere;
-                                if (czyMa.equalsIgnoreCase("T")){
+                                if (czyMa.equalsIgnoreCase("T")) {
                                     czyMaKamere = true;
                                 } else {
                                     czyMaKamere = false;
                                 }
+                                System.out.print("Podaj wagę drona: ");
+                                waga = scanner.nextDouble();
                                 System.out.print("Podaj cenę drona: ");
                                 cena = scanner.nextBigDecimal();
                                 scanner.nextLine();
 
-                                Dron dron = new Dron(nazwa, cena, zasieg, czyMaKamere);
+                                Dron dron = new Dron(nazwa, cena, waga, zasieg, czyMaKamere);
                                 sklep.dodaj(dron);
                                 sklep.przyjmijNaMagazyn(dron, 0);
 
@@ -124,14 +129,29 @@ public class Menu {
 
                     break;
                 case "2":
-                        do {
-                            System.out.print("Podaj numer id produktu, który chcesz usunąć: ");
-                            long id = scanner.nextLong();
+                    produkt = null;
+                    do {
+                        System.out.print("Podaj numer ID produktu, który chcesz usunąć z katalogu sklepu: ");
+                        long id = scanner.nextLong();
+                        for (Produkt s : sklep.getProdukty()) {
+                            if (s.getId() == id) {
+                                produkt = s;
+                                break;
+                            }
+                        }
+                        if (produkt == null) {
+                            System.out.println("Nie ma takiego produktu w sklepie. Dodaj produkt lub podaj poprawny numer ID produktu.");
+                        } else {
                             sklep.usun(id);
-
-                            System.out.println("Chcesz usunąć kolejny komputer? T/N");
+                            System.out.println("Czy chcesz usunąć ten produkt również z magazynu? T/N");
                             wyborDodanie = scanner.next();
-                        } while (wyborDodanie.equalsIgnoreCase("T"));
+                            if (wyborDodanie.equalsIgnoreCase("T")){
+                                sklep.usunZMagazynu(produkt);
+                            }
+                        }
+                            System.out.println("Chcesz usunąć kolejny produkt? T/N");
+                            wyborDodanie = scanner.next();
+                    } while (wyborDodanie.equalsIgnoreCase("T"));
 
                     break;
                 case "3":
@@ -149,7 +169,7 @@ public class Menu {
                     case "6":{
                         System.out.print("Podaj ID produktu, który chcesz dodać do magazynu:");
                         long id = scanner.nextLong();
-                        Produkt produkt = null;
+                        produkt = null;
                         for (Produkt s : sklep.getProdukty()){
                             if (s.getId() == id) {
                                 produkt = s;
@@ -168,7 +188,8 @@ public class Menu {
                         case "7":
                         System.out.print("Podaj id produktu, który chcesz pobrać z magazynu:");
                         long id = scanner.nextLong();
-                        Produkt produkt = null;
+
+                        produkt = null;
                         for (Produkt s : sklep.getProdukty()){
                             if (s.getId() == id) {
                                 produkt = s;
@@ -181,10 +202,8 @@ public class Menu {
 
                             System.out.print("Podaj iloś produktu do pobrania z magazynu: ");
                             int ilosc = scanner.nextInt();
-                            boolean czyWystarczy;
+                            boolean czyWystarczy = (sklep.wydajZMagazynu(produkt, ilosc));
                             do {
-                                czyWystarczy = (sklep.wydajZMagazynu(produkt, ilosc));
-
                                 if (czyWystarczy) {
                                     break;
                                 } else {
@@ -193,18 +212,20 @@ public class Menu {
                                     System.out.println("2: Pobierz inną ilość");
                                     System.out.println("3: Zamów towar"); // do napisania
                                     System.out.println("4: Dodaj do magazynu");
+                                    System.out.println("5: Wyjdź do głównego menu");
+
 
                                     wyborDodanie = scanner.next();
                                     switch (wyborDodanie) {
 
                                         case "1":
                                             sklep.zmienStanMagazynowy(produkt);
-                                            System.out.println("Wydano wszystkie sztuki produktu o nazwie " + produkt.getNazwa());
                                             break;
                                         case "2":
                                             System.out.print("Podaj iloś produktu do pobrania z magazynu: ");
                                             ilosc = scanner.nextInt();
-                                            sklep.wydajZMagazynu(produkt, ilosc);
+                                czyWystarczy = (sklep.wydajZMagazynu(produkt, ilosc));
+//                                            sklep.wydajZMagazynu(produkt, ilosc);
 
                                             break;
                                         case "3":
@@ -217,12 +238,15 @@ public class Menu {
                                             sklep.przyjmijNaMagazyn(produkt, ilosc);
 
                                             break;
+                                        case "5":
+
+                                            break;
                                         default:
                                             System.out.println("Podałeś błedną opcję.");
                                             break;
                                     }
                                 }
-                            } while (czyWystarczy);
+                            } while (!czyWystarczy && wyborDodanie.equalsIgnoreCase("2"));
                         }
                     break;
                 case "8":
@@ -230,8 +254,18 @@ public class Menu {
 
                     break;
                 case "9":
-                    sklep.setGeneratorIdZamowienia(); // sprawdzam i ustawiam generator zamowienia po wczytaniu pliku
+                    sklep.setIdZamowienia(); // sprawdzam i ustawiam generator zamowienia po wczytaniu pliku
                     sklep.getKoszyk().clear(); //czyszcze koszyk
+
+                    WysylkaZamowien.Lista lista;
+                    try {
+                        lista = pliki.wczytajZamowieniaKuriera();
+                    } catch (Exception e) {
+                        System.out.println("Blad odczytu pliku");
+                        e.printStackTrace();
+                        lista = new WysylkaZamowien.Lista();
+                    }
+
                     do {
                         System.out.print("Podaj ID zakupionego produktu: ");
                         id = scanner.nextLong();
@@ -251,13 +285,78 @@ public class Menu {
 
                             sklep.dodajdoKoszyka(produkt, ilosc);
                         }
-                        System.out.println("Chcesz zatwierdzic kolejny produkt? T/N");
+                        System.out.println("Chcesz dodać do zamówienia kolejny produkt? T/N");
                         wyborDodanie = scanner.next();
                     } while (wyborDodanie.equalsIgnoreCase("T")) ;
-                        sklep.utworzZamowienie(sklep.getKoszyk());
-                        sklep.wydajZamowienieZMagazynu();
+
+                    System.out.println("Podaj dane kupującego.");
+                    System.out.println();
+                    System.out.println("Imię kupującego: ");
+                    String imie = scanner.next();
+                    System.out.println("Nazwisko kupującego: ");
+                    String nazwisko = scanner.next();
+                    System.out.println("Podaj adres dostawy. ");
+                    System.out.println();
+                    System.out.println("Podaj ulicę: ");
+                    String ulica = scanner.next();
+                    System.out.println("Podaj kod pocztowy: ");
+                    String kodPocztowy = scanner.next();
+                    System.out.println("Podaj miasto: ");
+                    String miasto = scanner.next();
+                    System.out.println("Podaj numer telefonu ");
+                    String telefon = scanner.next();
+
+                    sklep.utworzZamowienie(sklep.getKoszyk());
+                    do {
+                        System.out.println("1: Sprawdź szczegóły zamówienia");
+                        System.out.println("2: Zatwierdź zamówienie (dodaj do listy kuriera i pobierz towar z magazynu)");
+                        System.out.println("3: Cofnij zamówienie");
+                        System.out.println("4: Wyjdź do głównego menu");
+
+                        wyborDodanie = scanner.next();
+
+                        switch (wyborDodanie) {
+
+                            case "1":
+                                sklep.pokazSzczegolyZamowienia();
+
+                                break;
+                            case "2":
+
+                                WysylkaZamowien.Adres adres = new WysylkaZamowien.Adres(ulica, miasto, kodPocztowy);
+                                WysylkaZamowien zamowienie = new WysylkaZamowien(imie, nazwisko, telefon, adres, sklep.wartoscZamowienia(), sklep.getIdZamowienia());
+
+                                lista.dodajDoListyKuriera(zamowienie);
+
+                                try {
+                                    pliki.wyslijZamowienieKurierowi(lista);
+                                } catch (Exception e) {
+                                    System.out.println("Blad zapisu do pliku");
+                                    e.printStackTrace();
+                                }
+                                System.out.println();
+                                sklep.wydajZamowienieZMagazynu();
+
+                                break;
+                            case "3":
+                                sklep.usunZamowienie(sklep.getIdZamowienia());
+
+                                break;
+                            case "4":
+                                break;
+                        }
+                    } while(wyborDodanie.equalsIgnoreCase("1"));
 
                     break;
+                case "10":
+                    System.out.print("Podaj numer zamówienie do usunięcia: ");
+                    id = scanner.nextLong();
+                    sklep.usunZamowienie(id);
+
+                    break;
+                case "11":
+                    System.out.println("Poniżej aktualna lista zamówień: ");
+                    sklep.pokazListeZamowien();
                 case "q":
                 case "Q":                           // Jeśli dwa case po soboie to albo albo
                     System.out.println("Koniec");
@@ -282,6 +381,7 @@ public class Menu {
                     System.out.println("8- pokaz stan magazynu");
                     System.out.println("9- przyjmij zamowienie");
                     System.out.println("10- usun zamowienie");
+                    System.out.println("11- pokaz liste zamowien");
                     System.out.println("q- wyjdz");
 
                     break;

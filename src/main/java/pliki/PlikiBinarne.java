@@ -1,6 +1,7 @@
 package pliki;
 
 import model.Sklep;
+import model.WysylkaZamowien;
 
 import java.io.*;
 
@@ -19,7 +20,7 @@ public class PlikiBinarne implements OperacjePlikowe {
         fos.close(); //zamykamy w odwrotnej kolejnosci niz otwieralismy
     }
 
-    public Sklep wczytaj()throws IOException, ClassNotFoundException {
+    public Sklep wczytaj() throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream("sklep.bin");
 
         ObjectInputStream ois = new ObjectInputStream(fis);
@@ -29,6 +30,31 @@ public class PlikiBinarne implements OperacjePlikowe {
         fis.close();
 
         return sklep;
+    }
+
+    @Override
+    public WysylkaZamowien.Lista wczytajZamowieniaKuriera() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream("kurier.bin");
+
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        WysylkaZamowien.Lista wysylka = (WysylkaZamowien.Lista) ois.readObject();
+
+        ois.close();
+        fis.close();
+
+        return wysylka;
+    }
+
+    @Override
+    public void wyslijZamowienieKurierowi(WysylkaZamowien.Lista wysylka) throws Exception {
+        FileOutputStream fos = new FileOutputStream("kurier.bin");
+
+        ObjectOutputStream ous = new ObjectOutputStream(fos);
+        ous.writeObject(wysylka);
+
+        ous.close();
+        fos.close();
+
     }
 }
 

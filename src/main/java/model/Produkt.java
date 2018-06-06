@@ -19,13 +19,15 @@ public abstract class Produkt implements Comparable<Produkt>, Serializable {
     protected String nazwa;
     protected BigDecimal cena;
     protected long id;
+    protected double waga;
 
     static long generatorId = 0L;
 
     public Produkt(){}
-    public Produkt(String nazwa, BigDecimal cena) {
+    public Produkt(String nazwa, BigDecimal cena, double waga) {
         this.nazwa = nazwa;
         this.cena = cena;
+        this.waga = waga;
         generatorId++;
         this.id = generatorId;
     }
@@ -42,6 +44,10 @@ public abstract class Produkt implements Comparable<Produkt>, Serializable {
         return id;
     }
 
+    public double getWaga() {
+        return waga;
+    }
+
     @Override
     public int compareTo(Produkt o) {
         if(this.cena.compareTo(o.cena) > 0){
@@ -54,11 +60,11 @@ public abstract class Produkt implements Comparable<Produkt>, Serializable {
 
     @Override
     public String toString() {
-        return "Produkt{" +
-                "nazwa='" + nazwa + '\'' +
-                ", cena=" + cena +
-                ", id=" + id +
-                '}';
+        return
+                "|| Nazwa: " + nazwa  + " | " +
+                "Waga: " + waga + " | " +
+                "Cena: " + cena + " | " +
+                "Numer ID: " + id + " || ";
     }
 
     @Override
@@ -67,6 +73,7 @@ public abstract class Produkt implements Comparable<Produkt>, Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Produkt produkt = (Produkt) o;
         return id == produkt.id &&
+                Double.compare(produkt.waga, waga) == 0 &&
                 Objects.equals(nazwa, produkt.nazwa) &&
                 Objects.equals(cena, produkt.cena);
     }
@@ -74,7 +81,6 @@ public abstract class Produkt implements Comparable<Produkt>, Serializable {
     @Override
     public int hashCode() {
 
-        return nazwa.hashCode() + cena.hashCode() + Long.hashCode(id);
-//        return Objects.hash(nazwa, cena, id);
+        return Objects.hash(nazwa, cena, id, waga);
     }
 }

@@ -3,6 +3,7 @@ package pliki;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Sklep;
+import model.WysylkaZamowien;
 
 import java.io.File;
 
@@ -17,5 +18,17 @@ public class PlikiJson implements OperacjePlikowe{
         ObjectMapper mapper = new ObjectMapper();
         Sklep sklep = mapper.readValue(new File ("sklep.json"), Sklep.class);
         return sklep;
+    }
+
+    public void wyslijZamowienieKurierowi(WysylkaZamowien.Lista wysylka)  throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writerWithDefaultPrettyPrinter()
+                .writeValue(new File("kurier.json"), wysylka);
+    }
+
+    public WysylkaZamowien.Lista wczytajZamowieniaKuriera()  throws Exception{
+        ObjectMapper mapper = new ObjectMapper();
+        WysylkaZamowien.Lista wysylka = mapper.readValue(new File ("kurier.json"), WysylkaZamowien.Lista.class);
+        return wysylka;
     }
 }

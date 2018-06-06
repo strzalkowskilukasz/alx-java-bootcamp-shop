@@ -1,55 +1,57 @@
 {
+  "nazwa" : "komputeryidrony.com",
   "produkty" : [ {
     "typ" : "komputer",
     "nazwa" : "a",
-    "cena" : 1,
+    "cena" : 2,
     "id" : 1,
+    "waga" : 2.0,
     "marka" : "a",
-    "ram" : 1
+    "ram" : 2
   }, {
     "typ" : "dron",
-    "nazwa" : "b",
-    "cena" : 2,
+    "nazwa" : "w",
+    "cena" : 4,
     "id" : 2,
+    "waga" : 4.0,
     "zasieg" : 2.0,
     "czyMaKamere" : true
   }, {
     "typ" : "komputer",
-    "nazwa" : "c",
-    "cena" : 3,
+    "nazwa" : "w",
+    "cena" : 2,
     "id" : 3,
-    "marka" : "c",
-    "ram" : 3
-  }, {
-    "typ" : "dron",
-    "nazwa" : "d",
-    "cena" : 4,
-    "id" : 4,
-    "zasieg" : 4.0,
-    "czyMaKamere" : false
+    "waga" : 1.0,
+    "marka" : "w",
+    "ram" : 2
   } ],
   "magazyn" : {
-    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":1,\"id\":1,\"marka\":\"a\",\"ram\":1}" : 11,
-    "{\"typ\":\"dron\",\"nazwa\":\"b\",\"cena\":2,\"id\":2,\"zasieg\":2.0,\"czyMaKamere\":true}" : 12,
-    "{\"typ\":\"komputer\",\"nazwa\":\"c\",\"cena\":3,\"id\":3,\"marka\":\"c\",\"ram\":3}" : 10,
-    "{\"typ\":\"dron\",\"nazwa\":\"d\",\"cena\":4,\"id\":4,\"zasieg\":4.0,\"czyMaKamere\":false}" : 14
+    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":2,\"id\":1,\"waga\":2.0,\"marka\":\"a\",\"ram\":2}" : 97,
+    "{\"typ\":\"dron\",\"nazwa\":\"w\",\"cena\":4,\"id\":2,\"waga\":4.0,\"zasieg\":2.0,\"czyMaKamere\":true}" : 193,
+    "{\"typ\":\"komputer\",\"nazwa\":\"w\",\"cena\":2,\"id\":3,\"waga\":1.0,\"marka\":\"w\",\"ram\":2}" : 300
   },
   "koszyk" : {
-    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":1,\"id\":1,\"marka\":\"a\",\"ram\":1}" : 1,
-    "{\"typ\":\"dron\",\"nazwa\":\"b\",\"cena\":2,\"id\":2,\"zasieg\":2.0,\"czyMaKamere\":true}" : 2,
-    "{\"typ\":\"komputer\",\"nazwa\":\"c\",\"cena\":3,\"id\":3,\"marka\":\"c\",\"ram\":3}" : 3
+    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":2,\"id\":1,\"waga\":2.0,\"marka\":\"a\",\"ram\":2}" : 1
   },
   "zamowienie" : {
-    "6" : {
-      "Komputer{nazwa='a', cena=1, marka='a', ram=1, id=1}" : 1
+    "1" : {
+      "|| Komputer  | Nazwa: a | Marka: a | Ilość pamięci RAM: 2 GB | Waga: 2.0 kg | Cena: 2 PLN netto | Numer ID: 1 || " : 23,
+      "|| Dron  | Nazwa: w | Zasięg: 2.0metrów | Czy posiada kamerę? TAK | Waga: 4.0 kg | Cena: 4 PLN netto | Numer ID: 2 || " : 32,
+      "|| Komputer  | Nazwa: w | Marka: w | Ilość pamięci RAM: 2 GB | Waga: 1.0 kg | Cena: 2 PLN netto | Numer ID: 3 || " : 2
     },
-    "7" : {
-      "Komputer{nazwa='c', cena=3, marka='c', ram=3, id=3}" : 3
+    "2" : {
+      "|| Komputer  | Nazwa: a | Marka: a | Ilość pamięci RAM: 2 GB | Waga: 2.0 kg | Cena: 2 PLN netto | Numer ID: 1 || " : 1,
+      "|| Dron  | Nazwa: w | Zasięg: 2.0metrów | Czy posiada kamerę? TAK | Waga: 4.0 kg | Cena: 4 PLN netto | Numer ID: 2 || " : 2
     },
-    "8" : {
-      "Komputer{nazwa='a', cena=1, marka='a', ram=1, id=1}" : 1,
-      "Dron{zasieg=2.0, czyMaKAmere=true, nazwa='b', cena=2, id=2}" : 2,
-      "Komputer{nazwa='c', cena=3, marka='c', ram=3, id=3}" : 3
+    "0" : {
+      "|| Komputer  | Nazwa: a | Marka: a | Ilość pamięci RAM: 2 GB | Waga: 2.0 kg | Cena: 2 PLN netto | Numer ID: 1 || " : 1,
+      "|| Dron  | Nazwa: w | Zasięg: 2.0metrów | Czy posiada kamerę? TAK | Waga: 4.0 kg | Cena: 4 PLN netto | Numer ID: 2 || " : 5
+    },
+    "4" : {
+      "|| Komputer  | Nazwa: a | Marka: a | Ilość pamięci RAM: 2 GB | Waga: 2.0 kg | Cena: 2 PLN netto | Numer ID: 1 || " : 1
+    },
+    "5" : {
+      "|| Komputer  | Nazwa: a | Marka: a | Ilość pamięci RAM: 2 GB | Waga: 2.0 kg | Cena: 2 PLN netto | Numer ID: 1 || " : 1
     }
   }
 }

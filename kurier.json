@@ -1,0 +1,102 @@
+{
+  "lista kuriera" : [ {
+    "imie" : "aa",
+    "nazwisko" : "aa",
+    "telefon" : "2222",
+    "adres" : {
+      "ulica" : "www",
+      "miasto" : "ww",
+      "kodPocztowy" : "22"
+    },
+    "naleznosc" : 1081.180,
+    "idZamowienia" : 8
+  }, {
+    "imie" : "aa",
+    "nazwisko" : "aa",
+    "telefon" : "2222",
+    "adres" : {
+      "ulica" : "www",
+      "miasto" : "ww",
+      "kodPocztowy" : "22"
+    },
+    "naleznosc" : 1081.180,
+    "idZamowienia" : 8
+  }, {
+    "imie" : "a",
+    "nazwisko" : "a",
+    "telefon" : "2",
+    "adres" : {
+      "ulica" : "q",
+      "miasto" : "w",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 506.180,
+    "idZamowienia" : 9
+  }, {
+    "imie" : "q",
+    "nazwisko" : "q",
+    "telefon" : "123",
+    "adres" : {
+      "ulica" : "w",
+      "miasto" : "w",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 0.46,
+    "idZamowienia" : 4
+  }, {
+    "imie" : "a",
+    "nazwisko" : "a",
+    "telefon" : "123212",
+    "adres" : {
+      "ulica" : "wwqwq",
+      "miasto" : "ww",
+      "kodPocztowy" : "22"
+    },
+    "naleznosc" : 51.90,
+    "idZamowienia" : 8
+  }, {
+    "imie" : "a",
+    "nazwisko" : "a",
+    "telefon" : "12121234",
+    "adres" : {
+      "ulica" : "w",
+      "miasto" : "q",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 54.06,
+    "idZamowienia" : 0
+  }, {
+    "imie" : "q",
+    "nazwisko" : "q",
+    "telefon" : "22",
+    "adres" : {
+      "ulica" : "q",
+      "miasto" : "w",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 0.46,
+    "idZamowienia" : 0
+  }, {
+    "imie" : "w",
+    "nazwisko" : "w",
+    "telefon" : "3",
+    "adres" : {
+      "ulica" : "r",
+      "miasto" : "r",
+      "kodPocztowy" : "3"
+    },
+    "naleznosc" : 0.46,
+    "idZamowienia" : 6
+  }, {
+    "imie" : "s",
+    "nazwisko" : "s",
+    "telefon" : "3",
+    "adres" : {
+      "ulica" : "w",
+      "miasto" : "d",
+      "kodPocztowy" : "3"
+    },
+    "naleznosc" : 0.46,
+    "idZamowienia" : 6
+  } ]
+}

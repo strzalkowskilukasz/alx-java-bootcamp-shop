@@ -9,8 +9,8 @@ public class Dron extends Produkt{
     private boolean czyMaKamere;
 
     public Dron(){}
-    public Dron(String nazwa, BigDecimal cena, double zasieg, boolean czyMaKamere) {
-        super(nazwa, cena);
+    public Dron(String nazwa, BigDecimal cena, double waga, double zasieg, boolean czyMaKamere) {
+        super(nazwa, cena, waga);
         this.zasieg = zasieg;
         this.czyMaKamere = czyMaKamere;
     }
@@ -22,15 +22,24 @@ public class Dron extends Produkt{
     public boolean isCzyMaKamere() {
         return czyMaKamere;
     }
+    public String czyPosiadaKamere() {
+        if (isCzyMaKamere()) {
+            return "TAK";
+
+        } else {
+            return "NIE";
+        }
+    }
 
     @Override
     public String toString() {
-        return "Dron{" +
-                "zasieg=" + zasieg +
-                ", czyMaKAmere=" + czyMaKamere +
-                ", nazwa='" + nazwa + '\'' +
-                ", cena=" + cena +
-                ", id=" + id +
-                '}';
+        return
+                "|| Dron " + " | " +
+                "Nazwa: " + nazwa  + " | " +
+                "Zasięg: " + zasieg  + " metrów" + " | " +
+                "Czy posiada kamerę? " + czyPosiadaKamere() + " | " +
+                "Waga: " + waga + " kg" + " | " +
+                "Cena: " + cena + " PLN netto" + " | " +
+                "Numer ID: " + id + " || ";
     }
 }

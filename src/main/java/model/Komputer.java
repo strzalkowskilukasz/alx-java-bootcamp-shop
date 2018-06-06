@@ -8,8 +8,8 @@ public class Komputer extends Produkt {
     private int ram;
 
     public Komputer(){}
-    public Komputer(String nazwa, BigDecimal cena, String marka, int ram) {
-       super(nazwa, cena);
+    public Komputer(String nazwa, BigDecimal cena, double waga, String marka, int ram) {
+       super(nazwa, cena, waga);
         this.marka = marka;
         this.ram = ram;
     }
@@ -24,12 +24,13 @@ public class Komputer extends Produkt {
 
     @Override
     public String toString() {
-        return "Komputer{" +
-                "nazwa='" + nazwa + '\'' +
-                ", cena=" + cena +
-                ", marka='" + marka + '\'' +
-                ", ram=" + ram +
-                ", id=" + id +
-                '}';
+        return
+                "|| Komputer " + " | " +
+                "Nazwa: " + nazwa  + " | " +
+                "Marka: " + marka  + " | " +
+                "Ilość pamięci RAM: " + ram + " GB" + " | " +
+                "Waga: " + waga + " kg" + " | " +
+                "Cena: " + cena + " PLN netto" + " | " +
+                "Numer ID: " + id + " || ";
     }
 }
