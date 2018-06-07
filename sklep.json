@@ -2,56 +2,46 @@
   "nazwa" : "komputeryidrony.com",
   "produkty" : [ {
     "typ" : "komputer",
-    "nazwa" : "a",
-    "cena" : 2,
+    "nazwa" : "MacBook Air 2017",
+    "cena" : 3399,
     "id" : 1,
-    "waga" : 2.0,
-    "marka" : "a",
-    "ram" : 2
+    "waga" : 2.3,
+    "marka" : "Apple",
+    "ram" : 16
   }, {
     "typ" : "dron",
-    "nazwa" : "w",
-    "cena" : 4,
+    "nazwa" : "Xiaomi",
+    "cena" : 2000,
     "id" : 2,
-    "waga" : 4.0,
-    "zasieg" : 2.0,
-    "czyMaKamere" : true
+    "waga" : 4.1,
+    "zasieg" : 400.0,
+    "czyMaKamere" : false
   }, {
     "typ" : "komputer",
-    "nazwa" : "w",
-    "cena" : 2,
+    "nazwa" : "s7000",
+    "cena" : 4000,
     "id" : 3,
-    "waga" : 1.0,
-    "marka" : "w",
-    "ram" : 2
+    "waga" : 3.0,
+    "marka" : "Samsung",
+    "ram" : 4
   } ],
   "magazyn" : {
-    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":2,\"id\":1,\"waga\":2.0,\"marka\":\"a\",\"ram\":2}" : 97,
-    "{\"typ\":\"dron\",\"nazwa\":\"w\",\"cena\":4,\"id\":2,\"waga\":4.0,\"zasieg\":2.0,\"czyMaKamere\":true}" : 193,
-    "{\"typ\":\"komputer\",\"nazwa\":\"w\",\"cena\":2,\"id\":3,\"waga\":1.0,\"marka\":\"w\",\"ram\":2}" : 300
+    "{\"typ\":\"komputer\",\"nazwa\":\"MacBook Air 2017\",\"cena\":3399,\"id\":1,\"waga\":2.3,\"marka\":\"Apple\",\"ram\":16}" : 98,
+    "{\"typ\":\"dron\",\"nazwa\":\"Xiaomi\",\"cena\":2000,\"id\":2,\"waga\":4.1,\"zasieg\":400.0,\"czyMaKamere\":false}" : 199,
+    "{\"typ\":\"komputer\",\"nazwa\":\"s7000\",\"cena\":4000,\"id\":3,\"waga\":3.0,\"marka\":\"Samsung\",\"ram\":4}" : 297
   },
   "koszyk" : {
-    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":2,\"id\":1,\"waga\":2.0,\"marka\":\"a\",\"ram\":2}" : 1
+    "{\"typ\":\"komputer\",\"nazwa\":\"MacBook Air 2017\",\"cena\":3399,\"id\":1,\"waga\":2.3,\"marka\":\"Apple\",\"ram\":16}" : 1,
+    "{\"typ\":\"komputer\",\"nazwa\":\"s7000\",\"cena\":4000,\"id\":3,\"waga\":3.0,\"marka\":\"Samsung\",\"ram\":4}" : 3
   },
   "zamowienie" : {
     "1" : {
-      "|| Komputer  | Nazwa: a | Marka: a | Ilość pamięci RAM: 2 GB | Waga: 2.0 kg | Cena: 2 PLN netto | Numer ID: 1 || " : 23,
-      "|| Dron  | Nazwa: w | Zasięg: 2.0metrów | Czy posiada kamerę? TAK | Waga: 4.0 kg | Cena: 4 PLN netto | Numer ID: 2 || " : 32,
-      "|| Komputer  | Nazwa: w | Marka: w | Ilość pamięci RAM: 2 GB | Waga: 1.0 kg | Cena: 2 PLN netto | Numer ID: 3 || " : 2
+      "|| Komputer  | Nazwa: MacBook Air 2017 | Marka: Apple | Ilość pamięci RAM: 16 GB | Waga: 2.3 kg | Cena: 3399 PLN netto | Numer ID: 1 || " : 1,
+      "|| Komputer  | Nazwa: s7000 | Marka: Samsung | Ilość pamięci RAM: 4 GB | Waga: 3.0 kg | Cena: 4000 PLN netto | Numer ID: 3 || " : 3
     },
     "2" : {
-      "|| Komputer  | Nazwa: a | Marka: a | Ilość pamięci RAM: 2 GB | Waga: 2.0 kg | Cena: 2 PLN netto | Numer ID: 1 || " : 1,
-      "|| Dron  | Nazwa: w | Zasięg: 2.0metrów | Czy posiada kamerę? TAK | Waga: 4.0 kg | Cena: 4 PLN netto | Numer ID: 2 || " : 2
-    },
-    "0" : {
-      "|| Komputer  | Nazwa: a | Marka: a | Ilość pamięci RAM: 2 GB | Waga: 2.0 kg | Cena: 2 PLN netto | Numer ID: 1 || " : 1,
-      "|| Dron  | Nazwa: w | Zasięg: 2.0metrów | Czy posiada kamerę? TAK | Waga: 4.0 kg | Cena: 4 PLN netto | Numer ID: 2 || " : 5
-    },
-    "4" : {
-      "|| Komputer  | Nazwa: a | Marka: a | Ilość pamięci RAM: 2 GB | Waga: 2.0 kg | Cena: 2 PLN netto | Numer ID: 1 || " : 1
-    },
-    "5" : {
-      "|| Komputer  | Nazwa: a | Marka: a | Ilość pamięci RAM: 2 GB | Waga: 2.0 kg | Cena: 2 PLN netto | Numer ID: 1 || " : 1
+      "|| Komputer  | Nazwa: MacBook Air 2017 | Marka: Apple | Ilość pamięci RAM: 16 GB | Waga: 2.3 kg | Cena: 3399 PLN netto | Numer ID: 1 || " : 1,
+      "|| Komputer  | Nazwa: s7000 | Marka: Samsung | Ilość pamięci RAM: 4 GB | Waga: 3.0 kg | Cena: 4000 PLN netto | Numer ID: 3 || " : 3
     }
   }
 }
