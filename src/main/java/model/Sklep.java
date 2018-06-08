@@ -14,23 +14,29 @@ import java.util.*;
 
 
 public class Sklep implements Serializable {
+    @JsonProperty("nazwa")
+    private String nazwa;
 
     @JsonProperty("produkty")
     private Collection<Produkt> produkty;
+
     @JsonProperty("magazyn")
     @JsonSerialize(keyUsing =
             ProduktSerializer.class)
     @JsonDeserialize(keyUsing = ProduktDeserializer.class)
     private Map<Produkt, Integer> magazyn;
+
     @JsonProperty("koszyk")
     @JsonSerialize(keyUsing =
             ProduktSerializer.class)
     @JsonDeserialize(keyUsing = ProduktDeserializer.class)
     private Map<Produkt, Integer> koszyk;
+
+    @JsonProperty("Aktualne ID zamówienia")
+    private long idZamowienia = 0L;
+
     @JsonProperty("zamowienie")
     private Map<Long, Object> zamowienie;
-    private String nazwa;
-    private long idZamowienia = 0L;
 
     static BigDecimal kosztPrzesylkiDo5Kg = BigDecimal.valueOf(0);
     static BigDecimal kosztPrzesylkiDo10Kg = BigDecimal.valueOf(30.0);
@@ -48,7 +54,7 @@ public class Sklep implements Serializable {
         this.koszyk = new LinkedHashMap<>();
         this.zamowienie = new LinkedHashMap<>();
         this.nazwa = nazwa;
-        this.idZamowienia = 1L;
+        this.idZamowienia = 0L;
     }
 // gettery
 
@@ -89,16 +95,6 @@ public class Sklep implements Serializable {
         Produkt.generatorId = IdMax;
     }
 
-    public void setIdZamowienia() {
-        long IdMax = 0L;
-        for (Long temp : zamowienie.keySet()) {
-            if (IdMax < temp) {
-                IdMax = temp;
-            }
-        }
-        idZamowienia = IdMax;
-    }
-
     public long wygenerujIdZamowienia() {
         idZamowienia++;
         return idZamowienia;
@@ -108,7 +104,6 @@ public class Sklep implements Serializable {
         produkty.add(produkt);
         System.out.println("Dodano do katalogu nowy produkt o numerze ID: " + produkt.getId());
     }
-
 
     public void usun(long id) {
 

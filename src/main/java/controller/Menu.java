@@ -252,8 +252,7 @@ public class Menu {
 
                     break;
                 case "9":
-                    sklep.setIdZamowienia(); // sprawdzam i ustawiam generator zamowienia po wczytaniu pliku
-                    sklep.getKoszyk().clear(); //czyszcze koszyk
+                    sklep.getKoszyk().clear(); //czyszczę koszyk
 
                     try {
                         lista = pliki.wczytajZamowieniaKuriera();

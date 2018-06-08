@@ -1,25 +1,25 @@
 {
   "lista kuriera" : [ {
-    "imie" : "Arek",
-    "nazwisko" : "Milik",
-    "telefon" : "500 400 300",
+    "imie" : "Jakub",
+    "nazwisko" : "Błaszczykowski",
+    "telefon" : "900 200 300",
     "adres" : {
-      "ulica" : "Sławna",
-      "miasto" : "Bziny",
-      "kodPocztowy" : "00-023"
+      "ulica" : "Merkel Starsse",
+      "miasto" : "Dortmund",
+      "kodPocztowy" : "00-222"
     },
-    "naleznosc" : 6570.77,
+    "naleznosc" : 9668.77,
     "idZamowienia" : 1
   }, {
     "imie" : "Robert",
-    "nazwisko" : "Robeński",
-    "telefon" : "600 500 400",
+    "nazwisko" : "Lewandowski",
+    "telefon" : "900 234 300",
     "adres" : {
-      "ulica" : "Dolna 12",
-      "miasto" : "Legionowo",
-      "kodPocztowy" : "05-20"
+      "ulica" : "Polna 22",
+      "miasto" : "Munchen",
+      "kodPocztowy" : "00-232"
     },
-    "naleznosc" : 18990.77,
+    "naleznosc" : 22603.77,
     "idZamowienia" : 2
   } ]
 }
