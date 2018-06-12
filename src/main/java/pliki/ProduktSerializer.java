@@ -8,17 +8,11 @@ import model.Produkt;
 
 import java.io.IOException;
 
-public class ProduktSerializer extends JsonSerializer<Produkt>
-{
-    static ObjectMapper mapper = new ObjectMapper();
+public class ProduktSerializer extends JsonSerializer<Produkt> {
 
     @Override
-    public void serialize( Produkt value,
-                           JsonGenerator jgen,
-                           SerializerProvider provider )
-            throws IOException
-    {
-        String json = mapper.writeValueAsString( value );
-        jgen.writeFieldName(json);
+    public void serialize(Produkt produkt, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+        String string = new ObjectMapper().writeValueAsString(produkt);
+        jsonGenerator.writeFieldName(string);
     }
 }

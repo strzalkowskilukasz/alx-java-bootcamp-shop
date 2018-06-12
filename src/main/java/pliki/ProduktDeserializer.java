@@ -7,13 +7,12 @@ import java.io.IOException;
 
 
 public class ProduktDeserializer extends KeyDeserializer {
-    static ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public Object deserializeKey(
             String key,
-            DeserializationContext ctxt) throws IOException{
+            DeserializationContext context) throws IOException{
 
-        return mapper.readValue(key, Produkt.class);
+        return new ObjectMapper().readValue(key, Produkt.class);
     }
 }
