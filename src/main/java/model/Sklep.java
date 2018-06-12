@@ -164,16 +164,15 @@ public class Sklep implements Serializable {
         System.out.println("Przyjęto na magazyn " + ilosc + " szt. produktu o numerze ID: " + produkt.getId());
     }
 
-    public boolean wydajZMagazynu(Produkt produkt, int ilosc) {
-        if (magazyn.get(produkt) < ilosc) {
-            System.out.println("W magazynie nie ma wystarczającej ilości tego produktu. Obecny stan to: " + magazyn.get(produkt));
-            return false;
-        } else {
+    public void wydajZMagazynu(Produkt produkt, int ilosc) throws ZaMaloTowaru{
+        if (magazyn.get(produkt) > ilosc) {
             int temp = magazyn.get(produkt) - ilosc;
             magazyn.replace(produkt, temp);
             System.out.println("Pobrano z magazynu " + ilosc + " szt. produktu o nazwie: " + produkt.getNazwa());
             System.out.println("Obecny stan magazynowy tego produktu to: " + magazyn.get(produkt));
-            return true;
+
+        } else {
+            throw new ZaMaloTowaru("W magazynie nie ma wystarczającej ilości tego produktu. " + "Obecny stan to: " + magazyn.get(produkt));
         }
     }
     public void usunZMagazynu(Produkt produkt) {
@@ -194,14 +193,6 @@ public class Sklep implements Serializable {
     }
 /* KOSZYK I JEGO METODY */
 
-    public boolean sprawdzDostepnoscZamowienia(Produkt produkt, int ilosc) {
-        if (magazyn.get(produkt) < ilosc) {
-            System.out.println("W magazynie nie ma wystarczającej ilości tego produktu. Obecny stan to: " + magazyn.get(produkt));
-            return false;
-        } else {
-            return true;
-        }
-    }
     public void dodajdoKoszyka(Produkt produkt, int ilosc) {
         if (koszyk.containsKey(produkt)) {
             koszyk.replace(produkt, koszyk.get(produkt) + ilosc);
@@ -329,5 +320,11 @@ public class Sklep implements Serializable {
                 "\nOSTATNI KOSZYK: " + "\n" +  koszyk +
                 "\nZAMÓWIENIA: " + "\n" + zamowienie;
     }
+/* Dedykowane wyjątki*/
 
+    public class ZaMaloTowaru extends Exception {
+        public ZaMaloTowaru(String string){
+            super(string);
+        }
+    }
 }

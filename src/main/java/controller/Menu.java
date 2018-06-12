@@ -207,11 +207,14 @@ public class Menu {
 
                             System.out.print("Podaj iloś produktu do pobrania z magazynu: ");
                             int ilosc = scanner.nextInt();
-                            boolean czyWystarczy = (sklep.wydajZMagazynu(produkt, ilosc));
-                            do {
-                                if (czyWystarczy) {
-                                    break;
-                                } else {
+
+                            try {
+                                sklep.wydajZMagazynu(produkt, ilosc);
+                            } catch (Sklep.ZaMaloTowaru ex) {
+                                System.out.println(ex.getMessage());
+
+                                boolean czyWystarczy = false;
+                                do {
                                     System.out.println("Wybierz jedną z opcji: ");
                                     System.out.println("1: Pobierz wszystko");
                                     System.out.println("2: Pobierz inną ilość");
@@ -227,9 +230,15 @@ public class Menu {
                                         case "2":
                                             System.out.print("Podaj iloś produktu do pobrania z magazynu: ");
                                             ilosc = scanner.nextInt();
-                                            czyWystarczy = (sklep.wydajZMagazynu(produkt, ilosc));
+                                            try {
+                                                sklep.wydajZMagazynu(produkt, ilosc);
+                                                czyWystarczy = true;
+                                                break;
+                                            } catch (Sklep.ZaMaloTowaru e) {
+                                                System.out.println(e.getMessage());
+                                            }
+                                                break;
 
-                                            break;
                                         case "3":
                                             System.out.print("Podaj iloś produktu: ");
                                             ilosc = scanner.nextInt();
@@ -240,11 +249,11 @@ public class Menu {
 
                                             break;
                                         default:
-                                            System.out.println("Podałeś błedną opcję.");
+                                            System.out.println("Podałeś błedną opcję. Powracam do głównego menu.");
                                             break;
                                     }
-                                }
-                            } while (!czyWystarczy && wyborDodanie.equalsIgnoreCase("2"));
+                                } while (wyborDodanie.equalsIgnoreCase("2") && !czyWystarczy);
+                            }
                         }
                     break;
                 case "8":
@@ -253,14 +262,6 @@ public class Menu {
                     break;
                 case "9":
                     sklep.getKoszyk().clear(); //czyszczę koszyk
-
-                    try {
-                        lista = pliki.wczytajZamowieniaKuriera();
-                    } catch (Exception e) {
-                        System.out.println("Blad odczytu pliku");
-                        e.printStackTrace();
-                        lista = new WysylkaZamowien.Lista();
-                    }
 
                     do {
                         System.out.print("Podaj ID zakupionego produktu: ");
@@ -277,13 +278,13 @@ public class Menu {
                         } else {
                             System.out.print("Podaj ilość zamówionego produktu: ");
                             int ilosc = scanner.nextInt();
-                            boolean czyWystarczy = (sklep.sprawdzDostepnoscZamowienia(produkt, ilosc));
-                            do {
-                                if (czyWystarczy) {
-                                    sklep.dodajdoKoszyka(produkt, ilosc);
-                                    sklep.wydajZMagazynu(produkt, ilosc);
-                                    break;
-                                } else {
+                            try {
+                                sklep.wydajZMagazynu(produkt, ilosc);
+                                sklep.dodajdoKoszyka(produkt, ilosc);
+                            } catch (Sklep.ZaMaloTowaru zaMaloTowaru) {
+                                System.out.println(zaMaloTowaru.getMessage());
+                                boolean czyWystarczy = false;
+                                do {
                                     System.out.println("Wybierz jedną z opcji: ");
                                     System.out.println("1: Anuluj tę pozycję zamówienia");
                                     System.out.println("2: Zamów inną ilość");
@@ -297,16 +298,22 @@ public class Menu {
                                         case "2":
                                             System.out.print("Podaj ilość zamówionego produktu: ");
                                             ilosc = scanner.nextInt();
-                                            czyWystarczy = (sklep.sprawdzDostepnoscZamowienia(produkt, ilosc));
+                                            try {
+                                                sklep.wydajZMagazynu(produkt, ilosc);
+                                                czyWystarczy = true;
+                                                sklep.dodajdoKoszyka(produkt, ilosc);
+
+                                            } catch (Sklep.ZaMaloTowaru e) {
+                                                System.out.println(e.getMessage());
+                                            }
 
                                             break;
-
                                         default:
                                             System.out.println("Podałeś błedną opcję. Ta pozycja zamówienia została anulowana.");
                                             break;
                                     }
-                                }
-                            } while (!czyWystarczy && wyborDodanie.equalsIgnoreCase("2"));
+                                } while (!czyWystarczy && wyborDodanie.equalsIgnoreCase("2"));
+                            }
                         }
                         System.out.println("Chcesz dodać do zamówienia kolejny produkt? T/N");
                         wyborDodanie = scanner.next();
@@ -349,7 +356,13 @@ public class Menu {
 
                                 break;
                             case "2":
-
+                    try {
+                        lista = pliki.wczytajZamowieniaKuriera();
+                    } catch (Exception e) {
+                        System.out.println("Blad odczytu pliku");
+                        e.printStackTrace();
+                        lista = new WysylkaZamowien.Lista();
+                    }
                                 WysylkaZamowien.Adres adres = new WysylkaZamowien.Adres(ulica, miasto, kodPocztowy);
                                 WysylkaZamowien zamowienie = new WysylkaZamowien(imie, nazwisko, telefon, adres, sklep.wartoscZamowienia(), sklep.getIdZamowienia());
 

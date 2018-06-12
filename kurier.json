@@ -21,5 +21,16 @@
     },
     "naleznosc" : 22603.77,
     "idZamowienia" : 2
+  }, {
+    "imie" : "Mariusz",
+    "nazwisko" : "Cwiąkalski",
+    "telefon" : "500 100 200",
+    "adres" : {
+      "ulica" : "Sasanki 12",
+      "miasto" : "Warszawa",
+      "kodPocztowy" : "00-202"
+    },
+    "naleznosc" : 4918.77,
+    "idZamowienia" : 3
   } ]
 }
