@@ -1,5 +1,7 @@
 package model;
 
+import model.Produkt;
+
 import java.math.BigDecimal;
 
 public class Komputer extends Produkt {

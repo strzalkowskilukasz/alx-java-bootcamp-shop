@@ -2,50 +2,55 @@
   "nazwa" : "komputeryidrony.com",
   "produkty" : [ {
     "typ" : "komputer",
-    "nazwa" : "MacBook Air 2018",
-    "cena" : 3999,
+    "nazwa" : "a",
+    "cena" : 2,
     "id" : 1,
-    "waga" : 1.9,
-    "marka" : "Apple",
-    "ram" : 8
-  }, {
-    "typ" : "dron",
-    "nazwa" : "Xiaomi",
-    "cena" : 2000,
-    "id" : 2,
-    "waga" : 3.3,
-    "zasieg" : 300.0,
-    "czyMaKamere" : false
+    "waga" : 2.0,
+    "marka" : "a",
+    "ram" : 2
   }, {
     "typ" : "komputer",
-    "nazwa" : "S7000",
-    "cena" : 3500,
+    "nazwa" : "a",
+    "cena" : 6,
+    "id" : 2,
+    "waga" : 6.0,
+    "marka" : "a",
+    "ram" : 5
+  }, {
+    "typ" : "komputer",
+    "nazwa" : "b",
+    "cena" : 1,
     "id" : 3,
-    "waga" : 2.3,
-    "marka" : "Samsung",
-    "ram" : 16
+    "waga" : 2.0,
+    "marka" : "b",
+    "ram" : 6
+  }, {
+    "typ" : "komputer",
+    "nazwa" : "z",
+    "cena" : 2,
+    "id" : 4,
+    "waga" : 2.0,
+    "marka" : "z",
+    "ram" : 2
+  }, {
+    "typ" : "komputer",
+    "nazwa" : "c",
+    "cena" : 3,
+    "id" : 5,
+    "waga" : 3.0,
+    "marka" : "c",
+    "ram" : 3
   } ],
   "magazyn" : {
-    "{\"typ\":\"komputer\",\"nazwa\":\"MacBook Air 2018\",\"cena\":3999,\"id\":1,\"waga\":1.9,\"marka\":\"Apple\",\"ram\":8}" : 97,
-    "{\"typ\":\"dron\",\"nazwa\":\"Xiaomi\",\"cena\":2000,\"id\":2,\"waga\":3.3,\"zasieg\":300.0,\"czyMaKamere\":false}" : 196,
-    "{\"typ\":\"komputer\",\"nazwa\":\"S7000\",\"cena\":3500,\"id\":3,\"waga\":2.3,\"marka\":\"Samsung\",\"ram\":16}" : 147
+    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":2,\"id\":1,\"waga\":2.0,\"marka\":\"a\",\"ram\":2}" : 99,
+    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":6,\"id\":2,\"waga\":6.0,\"marka\":\"a\",\"ram\":5}" : 0,
+    "{\"typ\":\"komputer\",\"nazwa\":\"b\",\"cena\":1,\"id\":3,\"waga\":2.0,\"marka\":\"b\",\"ram\":6}" : 0,
+    "{\"typ\":\"komputer\",\"nazwa\":\"z\",\"cena\":2,\"id\":4,\"waga\":2.0,\"marka\":\"z\",\"ram\":2}" : 0,
+    "{\"typ\":\"komputer\",\"nazwa\":\"c\",\"cena\":3,\"id\":5,\"waga\":3.0,\"marka\":\"c\",\"ram\":3}" : 0
   },
   "koszyk" : {
-    "{\"typ\":\"komputer\",\"nazwa\":\"MacBook Air 2018\",\"cena\":3999,\"id\":1,\"waga\":1.9,\"marka\":\"Apple\",\"ram\":8}" : 1
+    "{\"typ\":\"komputer\",\"nazwa\":\"a\",\"cena\":2,\"id\":1,\"waga\":2.0,\"marka\":\"a\",\"ram\":2}" : 1
   },
-  "Aktualne ID zamówienia" : 4,
-  "zamowienie" : {
-    "1" : {
-      "|| Komputer  | Nazwa: MacBook Air 2018 | Marka: Apple | Ilość pamięci RAM: 8 GB | Waga: 1.9 kg | Cena: 3999 PLN netto | Numer ID: 1 || " : 1,
-      "|| Dron  | Nazwa: Xiaomi | Zasięg: 300.0 metrów | Czy posiada kamerę? NIE | Waga: 3.3 kg | Cena: 2000 PLN netto | Numer ID: 2 || " : 2
-    },
-    "2" : {
-      "|| Komputer  | Nazwa: MacBook Air 2018 | Marka: Apple | Ilość pamięci RAM: 8 GB | Waga: 1.9 kg | Cena: 3999 PLN netto | Numer ID: 1 || " : 1,
-      "|| Dron  | Nazwa: Xiaomi | Zasięg: 300.0 metrów | Czy posiada kamerę? NIE | Waga: 3.3 kg | Cena: 2000 PLN netto | Numer ID: 2 || " : 2,
-      "|| Komputer  | Nazwa: S7000 | Marka: Samsung | Ilość pamięci RAM: 16 GB | Waga: 2.3 kg | Cena: 3500 PLN netto | Numer ID: 3 || " : 3
-    },
-    "3" : {
-      "|| Komputer  | Nazwa: MacBook Air 2018 | Marka: Apple | Ilość pamięci RAM: 8 GB | Waga: 1.9 kg | Cena: 3999 PLN netto | Numer ID: 1 || " : 1
-    }
-  }
+  "Aktualne ID zamówienia" : 1,
+  "zamowienie" : { }
 }

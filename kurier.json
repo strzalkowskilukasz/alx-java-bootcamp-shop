@@ -32,5 +32,170 @@
     },
     "naleznosc" : 4918.77,
     "idZamowienia" : 3
+  }, {
+    "imie" : "a",
+    "nazwisko" : "a",
+    "telefon" : "2",
+    "adres" : {
+      "ulica" : "w",
+      "miasto" : "w",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 36.00,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "s",
+    "telefon" : "1",
+    "adres" : {
+      "ulica" : "a",
+      "miasto" : "a",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 35.95,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "a",
+    "telefon" : "2",
+    "adres" : {
+      "ulica" : "w",
+      "miasto" : "w",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 35.95,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "as",
+    "telefon" : "3",
+    "adres" : {
+      "ulica" : "a",
+      "miasto" : "s",
+      "kodPocztowy" : "3"
+    },
+    "naleznosc" : 35.95,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "s",
+    "telefon" : "2",
+    "adres" : {
+      "ulica" : "a",
+      "miasto" : "a",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 3.59,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "s",
+    "nazwisko" : "a",
+    "telefon" : "3",
+    "adres" : {
+      "ulica" : "s",
+      "miasto" : "a",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 38.31,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "a",
+    "telefon" : "3",
+    "adres" : {
+      "ulica" : "s",
+      "miasto" : "s",
+      "kodPocztowy" : "3"
+    },
+    "naleznosc" : 38.31,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "1",
+    "nazwisko" : "1",
+    "telefon" : "1",
+    "adres" : {
+      "ulica" : "1",
+      "miasto" : "1",
+      "kodPocztowy" : "1"
+    },
+    "naleznosc" : 1.23,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "s",
+    "telefon" : "z",
+    "adres" : {
+      "ulica" : "s",
+      "miasto" : "2",
+      "kodPocztowy" : "s"
+    },
+    "naleznosc" : 1.23,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "a",
+    "telefon" : "2",
+    "adres" : {
+      "ulica" : "a",
+      "miasto" : "a",
+      "kodPocztowy" : "a"
+    },
+    "naleznosc" : 1.23,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "a",
+    "telefon" : "2",
+    "adres" : {
+      "ulica" : "a",
+      "miasto" : "2",
+      "kodPocztowy" : "a"
+    },
+    "naleznosc" : 2.46,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "s",
+    "telefon" : "2",
+    "adres" : {
+      "ulica" : "a",
+      "miasto" : "s",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 1.23,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "a",
+    "telefon" : "2",
+    "adres" : {
+      "ulica" : "a",
+      "miasto" : "a",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 2.46,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "a",
+    "telefon" : "3",
+    "adres" : {
+      "ulica" : "a",
+      "miasto" : "2",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 13.53,
+    "idZamowienia" : 1
+  }, {
+    "imie" : "a",
+    "nazwisko" : "a",
+    "telefon" : "",
+    "adres" : {
+      "ulica" : "a",
+      "miasto" : "a",
+      "kodPocztowy" : "2"
+    },
+    "naleznosc" : 2.46,
+    "idZamowienia" : 1
   } ]
 }

@@ -135,19 +135,24 @@ public class Sklep implements Serializable {
     }
 
     public void wyswietlPosortowanePoNazwie() {
-        Comparator<Produkt> nazwaKomparator = new Comparator<Produkt>() {
-            @Override
-            public int compare(Produkt o1, Produkt o2) {
-                if (o1.nazwa.compareTo(o2.nazwa) > 0) {
-                    return 1;
-                } else if (o1.nazwa.compareTo(o2.nazwa) < 0) {
-                    return -1;
-                } else
-                    return 0;
-            }
-        };
         List<Produkt> kopiaProdukty = new ArrayList<>(produkty);
-        Collections.sort(kopiaProdukty, nazwaKomparator);
+//        Collections.sort(kopiaProdukty, new Comparator<Produkt>() {
+//            @Override
+//            public int compare(Produkt o1, Produkt o2) {
+//                if (o1.nazwa.compareTo(o2.nazwa) > 0) {
+//                    return 1;
+//                } else if (o1.nazwa.compareTo(o2.nazwa) < 0) {
+//                    return -1;
+//                } else
+//                    return 0;
+//            }
+//        });
+
+//        Collections.sort(kopiaProdukty, (o1, o2) -> o1.nazwa.compareTo(o2.nazwa));
+//        kopiaProdukty.sort((o1, o2) -> o1.nazwa.compareTo(o2.nazwa));
+//        kopiaProdukty.sort(Comparator.comparing(o -> o.nazwa));
+        kopiaProdukty.sort(Comparator.comparing(Produkt::getNazwa));
+
         for (Produkt temp : kopiaProdukty) {
             System.out.println(temp);
         }
@@ -301,11 +306,12 @@ public class Sklep implements Serializable {
         System.out.println("Suma zamówienia wraz z przesyłką: " + wartoscZamowienia() + " PLN netto");
     }
 
+    @SuppressWarnings("unchecked cast- comiler forgets generics -> type of collection")
     public void pokazListeZamowien() {
         System.out.println("Poniżej aktualna lista zamówień: ");
         for (long temp : zamowienie.keySet()) {
             System.out.println("Numer zamówienia: " + temp);
-                for (Map.Entry<Object, Integer> entry : ((Map<Object, Integer>) zamowienie.get(temp)).entrySet()) {
+            for (Map.Entry<Object, Integer> entry : ((Map<Object, Integer>) zamowienie.get(temp)).entrySet()) {
                     System.out.println("Produkt: " + entry.getKey());
                     System.out.println("Ilość: " + entry.getValue());
                 }
